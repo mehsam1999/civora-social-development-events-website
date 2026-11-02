@@ -59,12 +59,12 @@ const stats: Stat[] = [
 
 export function Stats() {
   return (
-    <section className="bg-[#e8eee7]">
+    <section className="bg-[#ecf1e8]">
       <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
 
         {/* Centered Section Heading */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[0.7rem] font-medium tracking-[0.18em] text-[#c15f3c] uppercase">
+          <p className="text-[0.7rem] font-bold tracking-[0.18em] text-[#c15f3c] uppercase">
             Institutional Purpose &amp; Momentum
           </p>
 
