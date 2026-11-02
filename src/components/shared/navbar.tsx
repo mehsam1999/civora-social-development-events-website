@@ -1,10 +1,20 @@
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sun } from "lucide-react";
+import { Sun, Home, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -18,91 +28,143 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-[#faf8f5]/90 backdrop-blur">
-      <div className="relative mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-5 sm:px-8">
 
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex shrink-0 items-center"
-          aria-label="CIVORA home"
-        >
-          <div className="flex gap-2">
-          <Image
-            src="/images/LoGo.png"
-            alt="CIVORA Logo"
-            width={48}
-            height={48}
-            priority
-            className="size-12 object-contain"
-          />
+        {/* Main Navbar */}
+        <div className="relative flex h-16 items-center justify-between">
 
-            <div className="flex flex-col">
-              <h2 className="text-2xl font-bold text-[#1a4332]">
-                CIVORA
-              </h2>
-              <p className="text-xs tracking-wide text-[#3f4a43]">
-                DHAKA CIVIC TRUST
-              </p>
-            </div>
-          </div>
-        </Link>
-
-        {/* Center Navigation */}
-        <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex"
-          aria-label="Main"
-        >
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                  isActive
-                    ? "bg-[#1a4332] text-white shadow-sm"
-                    : `text-[#3f4a43] ${hoverStyle}`
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Right Actions */}
-        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
-
-          {/* Theme Toggle */}
-          <button
-            type="button"
-            aria-label="Toggle theme"
-            className={`flex size-9 items-center justify-center rounded-full text-[#3f4a43] transition-colors ${hoverStyle}`}
-          >
-            <Sun size={18} strokeWidth={1.8} />
-          </button>
-
-          {/* Login */}
+          {/* Logo */}
           <Link
-            href="/login"
-            aria-current={pathname === "/login" ? "page" : undefined}
-            className={cn(
-              "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              pathname === "/login"
-                ? "bg-[#1a4332] text-white shadow-sm"
-                : `text-[#3f4a43] ${hoverStyle}`
-            )}
+            href="/"
+            className="flex shrink-0 items-center"
+            aria-label="CIVORA home"
           >
-            Log in
+            <div className="flex gap-2">
+              <Image
+                src="/images/LoGo.png"
+                alt="CIVORA Logo"
+                width={48}
+                height={48}
+                priority
+                className="size-12 object-contain"
+              />
+
+              <div className="flex flex-col">
+                <h2 className="text-2xl font-bold text-[#1a4332]">
+                  CIVORA
+                </h2>
+                <p className="text-xs tracking-wide text-[#3f4a43]">
+                  DHAKA CIVIC TRUST
+                </p>
+              </div>
+            </div>
           </Link>
 
+          {/* Center Navigation */}
+          <nav
+            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex"
+            aria-label="Main"
+          >
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-[#1a4332] text-white shadow-sm"
+                      : `text-[#3f4a43] ${hoverStyle}`
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              aria-label="Toggle theme"
+              className={`flex size-9 items-center justify-center rounded-full text-[#3f4a43] transition-colors ${hoverStyle}`}
+            >
+              <Sun size={18} strokeWidth={1.8} />
+            </button>
+
+            {/* Login */}
+            <Link
+              href="/login"
+              aria-current={pathname === "/login" ? "page" : undefined}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                pathname === "/login"
+                  ? "bg-[#1a4332] text-white shadow-sm"
+                  : `text-[#3f4a43] ${hoverStyle}`
+              )}
+            >
+              Log in
+            </Link>
+
+          </div>
         </div>
+
+        {/* Mobile Breadcrumb Navigation */}
+        <div className="border-t border-black/[0.05] py-3 md:hidden">
+          <Breadcrumb>
+            <BreadcrumbList className="gap-2 text-xs">
+
+              {/* Home */}
+              <BreadcrumbItem>
+                {pathname === "/" ? (
+                  <BreadcrumbPage className="text-[#1a4332]">
+                    <Home className="size-4" />
+                    <span className="sr-only">Home</span>
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink
+                    href="/"
+                    aria-label="Home"
+                    className="text-[#5c665e] transition-colors hover:text-[#1a4332]"
+                  >
+                    <Home className="size-4" />
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+
+              <BreadcrumbSeparator>
+                <ChevronRight className="size-3 text-[#a0aaa1]" />
+              </BreadcrumbSeparator>
+
+              {/* Upcoming Events */}
+              <BreadcrumbItem>
+                {pathname.startsWith("/events") ? (
+                  <BreadcrumbPage className="font-medium text-[#1a4332]">
+                    Upcoming Events
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink
+                    href="/events"
+                    className="font-medium text-[#5c665e] transition-colors hover:text-[#1a4332]"
+                  >
+                    Upcoming Events
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+
       </div>
     </header>
   );
