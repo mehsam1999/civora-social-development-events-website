@@ -10,14 +10,12 @@ export function Banner() {
 
         {/* Left Content */}
         <div>
-          <p className="flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-[#6b746c] uppercase">
+          <p className="flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase">
             <span
               aria-hidden="true"
-              className="text-2xl leading-none text-[#c15f3c]"
-            >
-              •
-            </span>
-            <span>Dhaka Civic Registry · Dispatch 2025</span>
+              className="size-2 rounded-full bg-[#c15f3c]"
+            />
+            Dhaka Civic Registry · Dispatch 2025
           </p>
 
           <h1 className="mt-5 font-heading text-4xl leading-[1.05] tracking-tight text-[#1c2b23] sm:text-5xl lg:text-6xl">
