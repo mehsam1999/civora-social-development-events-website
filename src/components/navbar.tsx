@@ -26,22 +26,24 @@ export function Navbar() {
           className="flex shrink-0 items-center"
           aria-label="CIVORA home"
         >
+          <div className="flex gap-2">
           <Image
-            src="/images/logo.png"
-            alt="CIVORA"
-            width={44}
-            height={34}
+            src="/images/LoGo.png"
+            alt="CIVORA Logo"
+            width={48}
+            height={48}
             priority
-            className="h-9 w-auto"
+            className="size-12 object-contain"
           />
 
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-bold text-[#1a4332]">
-              CIVORA
-            </h2>
-            <p className="text-xs tracking-wide text-[#3f4a43]">
-              DHAKA CIVIC TRUST
-            </p>
+            <div className="flex flex-col">
+              <h2 className="text-2xl font-bold text-[#1a4332]">
+                CIVORA
+              </h2>
+              <p className="text-xs tracking-wide text-[#3f4a43]">
+                DHAKA CIVIC TRUST
+              </p>
+            </div>
           </div>
         </Link>
 

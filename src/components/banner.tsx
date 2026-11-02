@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export function Banner() {
   return (
-    <section className="bg-[#faf8f5]">
+    <section className="bg-[#f1f4ef]">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-20">
 
         {/* Left Content */}
