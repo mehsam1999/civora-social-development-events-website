@@ -4,6 +4,7 @@ import { Hanken_Grotesk, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
       className={`h-full antialiased ${hankenGrotesk.variable} ${newsreader.variable}`}
     >
       <body className={`${hankenGrotesk.className} min-h-full flex flex-col`}>
+        <Toaster position="top-right" richColors />
         <Navbar></Navbar>
         <main className="flex-1">
           {children}

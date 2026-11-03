@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 const eventTypes = [
   "Cleanup",
@@ -69,22 +70,22 @@ export default function CreateEventPage() {
     e.preventDefault();
 
     if (form.title.trim().length < 5) {
-      alert("Event title must contain at least 5 characters.");
+      toast.error("Event title must contain at least 5 characters.");
       return;
     }
 
     if (!form.eventDate || form.eventDate <= minDate) {
-      alert("Please select a future event date.");
+      toast.error("Please select a future event date.");
       return;
     }
 
     if (!form.eventType) {
-      alert("Please select an event type.");
+      toast.error("Please select an event type.");
       return;
     }
 
     if (imageError) {
-      alert("Please provide a valid image URL.");
+      toast.error("Please provide a valid image URL.");
       return;
     }
 
@@ -98,19 +99,20 @@ export default function CreateEventPage() {
       });
 
       const data = await res.json();
-      console.log(data);
-
+      // console.log(data);
+      
+      toast.success("Event created successfully!")
       setForm(initialForm);
     } 
     catch (error) {
       console.error("Error creating event:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
   return (
     <main className="min-h-screen bg-[#ecf1e8] px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-6xl">
 
         {/* Page Heading */}
         <div className="mb-12">

@@ -65,11 +65,9 @@ const UpcomingEventPage = () => {
 
         const data = await res.json();
         setEvents(data);
-      } 
-      catch (error) {
+      } catch (error) {
         console.log("Error fetching events:", error);
-      } 
-      finally {
+      } finally {
         setLoading(false);
       }
     };
@@ -98,7 +96,16 @@ const UpcomingEventPage = () => {
 
   const startIndex = (currentPage - 1) * eventsPerPage;
 
-  const currentEvents = filteredEvents.slice(startIndex, startIndex + eventsPerPage); //
+  const currentEvents = filteredEvents.slice(
+    startIndex,
+    startIndex + eventsPerPage
+  );
+
+  // Page Change and Scroll to Top
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   // Clear Filters
   const clearFilters = () => {
@@ -121,25 +128,25 @@ const UpcomingEventPage = () => {
   return (
     <main className="min-h-screen bg-[#ecf1e8] px-4 py-10 sm:px-6">
       {/* Heading */}
-      <section className="mx-auto max-w-7xl">
-        <p className="text-[10px] font-semibold tracking-[0.18em] text-[#477c57] uppercase">
-          Explore Opportunities
+      <div className="mb-8 mx-auto max-w-6xl">
+        <p className="mb-4 flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase">
+          <span className="size-2 rounded-full bg-[#c15f3c]" />
+          EXPLORE OPPORTUNITIES
         </p>
 
-        <h1 className="font-heading text-4xl font-medium tracking-tight text-[#163a2b] sm:text-5xl">
+        <h1 className="font-heading text-4xl font-medium tracking-tight text-[#173c2d] sm:text-5xl">
           Upcoming Events
         </h1>
 
-        <p className="mt-2 text-sm text-[#68776b]">
+        <p className="mt-1 max-w-xl text-sm leading-6 text-[#637268]">
           Discover local initiatives and join your community in making a
           difference.
         </p>
-      </section>
+      </div>
 
       {/* Filters */}
-      <section className="mx-auto mt-7 max-w-7xl border-y border-[#dce8dc] py-3">
+      <section className="mx-auto mt-7 max-w-6xl border-y border-[#dce8dc] py-3">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-[1.2fr_1.2fr_1.2fr_auto]">
-                    
           {/* Search */}
           <div className="relative">
             <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#78877c]" />
@@ -178,7 +185,7 @@ const UpcomingEventPage = () => {
               ))}
             </SelectContent>
           </Select>
-          
+
           {/* Location Search */}
           <div className="relative">
             <MapPin className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#78877c]" />
@@ -207,7 +214,7 @@ const UpcomingEventPage = () => {
       </section>
 
       {/* Event Cards */}
-      <section className="mx-auto mt-7 max-w-7xl">
+      <section className="mx-auto mt-7 max-w-6xl">
         {loading ? (
           <div className="py-20 text-center text-sm text-[#68776b]">
             Loading events...
@@ -251,7 +258,7 @@ const UpcomingEventPage = () => {
                   </p>
 
                   <Link
-                    href={`/events/${event._id}`}
+                    href={`/upcoming-events/${event._id}`}
                     className="mt-3 flex h-9 w-full items-center justify-center gap-2 rounded-sm bg-[#003b2e] text-xs font-medium text-white transition-colors hover:bg-[#24513c]"
                   >
                     View Details
@@ -290,7 +297,7 @@ const UpcomingEventPage = () => {
               variant="outline"
               size="sm"
               disabled={currentPage === 1}
-              onClick={() => setCurrentPage(currentPage - 1)}
+              onClick={() => handlePageChange(currentPage - 1)}
               className="h-8 rounded-sm text-xs"
             >
               Previous
@@ -302,7 +309,7 @@ const UpcomingEventPage = () => {
                   key={page}
                   size="sm"
                   variant={currentPage === page ? "default" : "outline"}
-                  onClick={() => setCurrentPage(page)}
+                  onClick={() => handlePageChange(page)}
                   className={`size-8 rounded-sm p-0 text-xs ${
                     currentPage === page
                       ? "bg-[#003b2e] text-white hover:bg-[#24513c]"
@@ -318,7 +325,7 @@ const UpcomingEventPage = () => {
               variant="outline"
               size="sm"
               disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage(currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
               className="h-8 rounded-sm text-xs"
             >
               Next
