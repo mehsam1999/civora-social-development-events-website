@@ -18,7 +18,7 @@ import {
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/events", label: "Upcoming Events" },
+  { href: "/upcoming-events", label: "Upcoming Events" },
 ];
 
 export function Navbar() {
@@ -147,13 +147,13 @@ export function Navbar() {
 
               {/* Upcoming Events */}
               <BreadcrumbItem>
-                {pathname.startsWith("/events") ? (
+                {pathname.startsWith("/upcoming-events") ? (
                   <BreadcrumbPage className="font-medium text-[#1a4332]">
                     Upcoming Events
                   </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink
-                    href="/events"
+                    href="/upcoming-events"
                     className="font-medium text-[#5c665e] transition-colors hover:text-[#1a4332]"
                   >
                     Upcoming Events

@@ -34,7 +34,7 @@ export function Banner() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button
-              render={<Link href="/events" />}
+              render={<Link href="/upcoming-events" />}
               className="h-11 rounded-full bg-[#1a4332] px-6 text-white hover:bg-[#14352a]"
             >
               Explore Events
