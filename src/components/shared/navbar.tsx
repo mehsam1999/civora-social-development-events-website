@@ -41,7 +41,7 @@ export function Navbar() {
           >
             <div className="flex gap-2">
               <Image
-                src="/images/LoGo.png"
+                src="/images/logo_ui.png"
                 alt="CIVORA Logo"
                 width={48}
                 height={48}

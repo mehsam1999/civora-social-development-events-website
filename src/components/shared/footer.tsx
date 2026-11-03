@@ -113,7 +113,7 @@ export function Footer() {
                   aria-hidden="true"
                   className="mt-0.5 size-4 shrink-0 text-[#3f4a43]"
                 />
-                <span className="leading-6">
+                <span>
                   Civic Action Hub, House 42, Road 11, Dhanmondi, Dhaka 1209,
                   Bangladesh
                 </span>

@@ -42,7 +42,7 @@ export function Banner() {
             </Button>
 
             <Button
-              render={<Link href="/events/new" />}
+              render={<Link href="/create-events" />}
               variant="outline"
               className="h-11 rounded-full border-[#d8d3ca] bg-transparent px-6 text-[#1c2b23] transition-colors hover:border-[#e0ebe3] hover:bg-[#e0ebe3] hover:text-[#1a4332]"
             >
