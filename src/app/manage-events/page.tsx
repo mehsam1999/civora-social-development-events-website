@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/pagination";
 
 import EditEventDialog from "@/components/EditEventDialog";
+import DeleteEventDialog from "@/components/DeleteEventDialog";
 
 type Event = {
   _id: string;
@@ -236,13 +237,7 @@ const ManageEventPage = () => {
                   <EditEventDialog data={event} />
 
                   {/* Delete */}
-                  <button
-                    type="button"
-                    className="flex h-8 items-center justify-center gap-1 rounded-sm bg-[#fbe9e5] px-2.5 text-[11px] font-medium text-[#a64e3d] transition-colors hover:bg-[#f5d8d1]"
-                  >
-                    <Trash2 className="size-3.5" />
-                    Delete
-                  </button>
+                  <DeleteEventDialog data={event}></DeleteEventDialog>
                 </div>
               </div>
             ))
