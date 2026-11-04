@@ -9,7 +9,6 @@ import {
   MapPin,
   CalendarDays,
   Eye,
-  Trash2,
   Loader2,
 } from "lucide-react";
 
@@ -21,9 +20,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import EditEventDialog from "@/components/dialog/EditEventDialog";
+import DeleteEventDialog from "@/components/dialog/DeleteEventDialog";
 
-import EditEventDialog from "@/components/EditEventDialog";
-import DeleteEventDialog from "@/components/DeleteEventDialog";
 
 type Event = {
   _id: string;

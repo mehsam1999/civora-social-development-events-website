@@ -112,7 +112,21 @@ export function Navbar() {
                   : `text-[#3f4a43] ${hoverStyle}`
               )}
             >
-              Log in
+              Log In
+            </Link>
+
+            {/* Sign Up */}
+            <Link
+              href="/signup"
+              aria-current={pathname === "/signup" ? "page" : undefined}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                pathname === "/signup"
+                  ? "bg-[#1a4332] text-white shadow-sm"
+                  : `text-[#3f4a43] ${hoverStyle}`
+              )}
+            >
+              Sign Up
             </Link>
 
           </div>
