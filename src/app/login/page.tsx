@@ -58,14 +58,14 @@ export default function SignInForm() {
     }
   };
 
-  const handleGoogleSignin = async () => {
-    const { error } = await authClient.signIn.social({
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
     });
 
-    if (error) {
-      toast.error("Google sign in failed!");
+    if (data) {
+      toast.success("You have successfully signed in with Google!");
+      router.push("/");
     }
   };
 
@@ -171,7 +171,7 @@ export default function SignInForm() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={handleGoogleSignin}
+                  onClick={handleGoogleLogin}
                   className="h-10 w-full rounded-sm border border-[#edf0ed] bg-white text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4]"
                 >
                   <svg

@@ -129,7 +129,10 @@ export function Navbar() {
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger render={
                   <Avatar className="size-10 cursor-pointer border-2 border-[#1a4332]">
-                    <AvatarImage src={user?.image || ""} alt={user?.name || "User"} />
+                    <AvatarImage
+                      src={user?.image || ""}
+                      alt={user?.name || "User"}
+                    />
                     <AvatarFallback className="bg-[#e0ebe3] font-semibold text-[#1a4332]">
                       {user?.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>

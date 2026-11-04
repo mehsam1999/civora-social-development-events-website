@@ -58,27 +58,33 @@ export default function SignUpForm() {
     const formData = new FormData(e.currentTarget);
 
     const user = Object.fromEntries(formData.entries()) as {
-      name: string;
-      email: string;
-      password: string;
-      photo: string;
-    }
-
-    console.log(user);
+    name: string;
+    email: string;
+    password: string;
+    photo: string;
+    };
 
     const { data, error } = await authClient.signUp.email({
-      ...user,
+    name: user.name,
+    email: user.email,
+    password: user.password,
+    image: user.photo || undefined,
     });
 
     if (data) {
-      toast.success("You have successfully created your account");
-      router.push("/");
+    toast.success("You have successfully created your account");
+    router.push("/");
     }
 
     if (error) {
-      toast.error("Create account failed!");
+    toast.error(error.message || "Create account failed!");
     }
   };
+  const handleGoogleSignup = async()=>{
+    const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  }
 
   return (
     <main className="flex py-20 flex-col items-center justify-center bg-[#f1faf1] px-4">
@@ -291,6 +297,7 @@ export default function SignUpForm() {
                 <Button
                   type="button"
                   variant="outline"
+                  onClick={handleGoogleSignup}
                   className="h-10 w-full rounded-sm border-0 bg-transparent text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4]"
                 >
                   <svg
