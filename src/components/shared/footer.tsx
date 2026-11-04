@@ -4,10 +4,10 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 const quickLinks = [
   { href: "/", label: "Home" },
-  { href: "/events", label: "Upcoming Events" },
-  { href: "/events/manage", label: "Create Events" },
-  { href: "/events/manage", label: "Manage Events" },
-  { href: "/events/joined", label: "Joined Events" },
+  { href: "/upcoming-events", label: "Upcoming Events" },
+  { href: "/create-events", label: "Create Events" },
+  { href: "/manage-events", label: "Manage Events" },
+  { href: "/join-events", label: "Joined Events" },
 ];
 
 const socials = [

@@ -10,6 +10,7 @@ import {
   CalendarDays,
   ArrowRight,
   SlidersHorizontal,
+  PlusCircle,
 } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
@@ -128,21 +129,38 @@ const UpcomingEventPage = () => {
   return (
     <main className="min-h-screen bg-[#ecf1e8] px-4 py-10 sm:px-6">
       {/* Heading */}
-      <div className="mb-8 mx-auto max-w-6xl">
-        <p className="mb-4 flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase">
-          <span className="size-2 rounded-full bg-[#c15f3c]" />
-          EXPLORE OPPORTUNITIES
-        </p>
+    <div className="mx-auto mb-8 flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
 
-        <h1 className="font-heading text-4xl font-medium tracking-tight text-[#173c2d] sm:text-5xl">
-          Upcoming Events
-        </h1>
+        <div className="mx-auto w-full max-w-6xl">
+            <div>
+                <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#e6f0eb] px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-[#34745b]">
+                <span className="size-2 rounded-full bg-[#c15f3c]" />
+                FUTURE COMMUNITY DRIVES
+                </p>
 
-        <p className="mt-1 max-w-xl text-sm leading-6 text-[#637268]">
-          Discover local initiatives and join your community in making a
-          difference.
-        </p>
-      </div>
+                <h1 className="font-heading text-4xl font-medium tracking-tight text-[#173c2d] sm:text-5xl">
+                Upcoming Events
+                </h1>
+            </div>
+
+            <div className="mt-2 md:flex w-full items-center justify-between gap-6">
+                <p className="max-w-xl text-sm leading-6 text-[#637268]">
+                Discover verified volunteer initiatives scheduled for upcoming dates.
+                Past events are automatically excluded so you can focus on active
+                drives that need support.
+                </p>
+
+                <Link
+                href="/create-events"
+                className="mt-2 flex h-10 w-full shrink-0 items-center justify-center rounded-sm bg-[#1a4332] px-6 text-white bg-[#003b2e] text-xs font-medium text-white transition-colors hover:bg-[#24513c] sm:mt-0 sm:w-auto"
+                >
+                <PlusCircle className="mr-2 size-4" />
+                Create Event
+                </Link>
+            </div>
+        </div>
+    </div>
+        
 
       {/* Filters */}
       <section className="mx-auto mt-7 max-w-6xl border-y border-[#dce8dc] py-3">
@@ -206,7 +224,7 @@ const UpcomingEventPage = () => {
             type="button"
             variant="ghost"
             onClick={clearFilters}
-            className="h-10 rounded-sm text-xs text-[#526b59] hover:bg-[#e0ebe3]"
+            className="h-10 rounded-sm text-xs text-[#526b59] transition-colors hover:border-[#e0ebe3] hover:bg-[#e0ebe3] hover:text-[#1a4332]"
           >
             Clear Filters
           </Button>

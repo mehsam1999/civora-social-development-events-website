@@ -192,7 +192,7 @@ const UpcomingEventDetails = async ({params}: {params: Promise<{ id: string }>;}
             </div>
 
             <Link
-              href="/join-event"
+              href="/join-events"
               className="mt-4 flex h-10 w-full items-center justify-center rounded-md bg-[#194635] text-xs font-medium text-white transition-colors hover:bg-[#14372a]"
             >
               Join This Event
