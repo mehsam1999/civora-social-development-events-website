@@ -81,9 +81,9 @@ export default function SignUpForm() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#f1faf1] px-4 py-8">
+    <main className="flex py-20 flex-col items-center justify-center bg-[#f1faf1] px-4">
 
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-md">
 
         <Card className="rounded-md border border-[#e5eee5] bg-white px-5 py-6 shadow-none sm:px-7">
 
