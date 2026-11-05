@@ -4,6 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const JoinEventDetailsCard = ({joinedEvent}:{joinedEvent:IUserJoinedEvent}) => {
+    const formatDate = (date: string) => {
+    return new Date(date).toLocaleString("en-US", {
+        weekday: "long",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+    };
     return (
     <div className="overflow-hidden rounded-lg border border-[#e0e9df] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
 
@@ -39,8 +47,8 @@ const JoinEventDetailsCard = ({joinedEvent}:{joinedEvent:IUserJoinedEvent}) => {
 
         {/* Event Date */}
         <div className="mt-2 flex items-center gap-2 text-[10px] text-[#637268]">
-          <CalendarDays className="size-3.5 shrink-0 text-[#557b68]" />
-          <span>{joinedEvent.eventDate}</span>
+          <CalendarDays className="size-3.5 text-[#a45c42]" />
+          <span>{formatDate(joinedEvent.eventDate)}</span>
         </div>
 
         {/* Event Location */}
@@ -52,7 +60,7 @@ const JoinEventDetailsCard = ({joinedEvent}:{joinedEvent:IUserJoinedEvent}) => {
         {/* Joined Date */}
         <div className="mt-2 flex items-center gap-2 text-[10px] text-[#34745b]">
           <Clock className="size-3.5 shrink-0" />
-          <span>Joined on {joinedEvent.joinedDate}</span>
+          <span>Joined on {formatDate(joinedEvent.joinedDate)}</span>
         </div>
 
         {/* View Details */}

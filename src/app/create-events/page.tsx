@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -27,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 const eventTypes = [
   "Cleanup",
@@ -49,6 +49,8 @@ const initialForm = {
 
 export default function CreateEventPage() {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
   const [form, setForm] = useState(initialForm);
   const [imageError, setImageError] = useState(false);
@@ -68,6 +70,13 @@ export default function CreateEventPage() {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+
+    // Check whether the user is logged in
+    if (!user) {
+      toast.error("Please login first to create an event!");
+      router.push("/login");
+      return;
+    }
 
     if (form.title.trim().length < 5) {
       toast.error("Event title must contain at least 5 characters.");
@@ -95,16 +104,24 @@ export default function CreateEventPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          email: user.email,
+        }),
       });
 
       const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Event creation failed!");
+        return;
+      }
+
       console.log(data);
-      
-      toast.success("Event created successfully!")
+
+      toast.success("Event created successfully!");
       setForm(initialForm);
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error creating event:", error);
       toast.error("Something went wrong. Please try again.");
     }

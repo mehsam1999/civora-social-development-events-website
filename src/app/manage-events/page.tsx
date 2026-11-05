@@ -22,10 +22,14 @@ import {
 } from "@/components/ui/pagination";
 import EditEventDialog from "@/components/dialog/EditEventDialog";
 import DeleteEventDialog from "@/components/dialog/DeleteEventDialog";
-import { IEvent } from "@/lib/types/events";
+import { IUserManageEvent } from "@/lib/types/userManageEvents";
+import { authClient } from "@/lib/auth-client";
 
 const ManageEventPage = () => {
-  const [events, setEvents] = useState<IEvent[]>([]);
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  const [events, setEvents] = useState<IUserManageEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,15 +37,19 @@ const ManageEventPage = () => {
 
   // Fetch Events
   useEffect(() => {
+    if (isPending) return;
+
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:8000/upcoming-events");
+        const res = await fetch(
+          `http://localhost:8000/manage-events/${user?.email}`
+        );
 
         if (!res.ok) {
           throw new Error("Failed to fetch events");
         }
 
-        const data: IEvent[] = await res.json();
+        const data: IUserManageEvent[] = await res.json();
         setEvents(data);
       } catch (error) {
         console.log("Error fetching events:", error);
@@ -51,7 +59,7 @@ const ManageEventPage = () => {
     };
 
     fetchEvents();
-  }, []);
+  }, [user?.email, isPending]);
 
   // Pagination
   const totalPages = Math.ceil(events.length / eventsPerPage);
