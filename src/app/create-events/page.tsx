@@ -54,9 +54,6 @@ export default function CreateEventPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  
-  
-
 
   const [form, setForm] = useState(initialForm);
   const [imageError, setImageError] = useState(false);

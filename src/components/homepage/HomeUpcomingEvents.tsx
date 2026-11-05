@@ -1,10 +1,11 @@
+
 import { IEvent } from "@/lib/types/events";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, MapPin, ArrowRight } from "lucide-react";
 
 const HomeUpcomingEvent = async () => {
-  const res = await fetch("http://localhost:8000/recent-upcoming-events", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recent-upcoming-events`, {
     cache: "no-store",
   });
 
@@ -31,12 +32,12 @@ const HomeUpcomingEvent = async () => {
           {/* Section Header */}
           <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-            <p className="flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase dark:text-[#aab9ad] my-4">
-            <span
-              aria-hidden="true"
-              className="size-2 rounded-full bg-[#c15f3c]"
-            />
-            MAKE A DIFFERENCE
+              <p className="my-4 flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase dark:text-[#aab9ad]">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full bg-[#c15f3c]"
+                />
+                MAKE A DIFFERENCE
               </p>
 
               <h2 className="font-heading text-3xl font-medium text-[#173c2d] sm:text-4xl dark:text-[#edf4ed]">
@@ -60,14 +61,14 @@ const HomeUpcomingEvent = async () => {
 
           {/* Events Grid */}
           {events.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {events.map((event) => (
                 <div
                   key={event._id}
-                  className="overflow-hidden rounded-xl border border-[#dce8dc] bg-white transition-all hover:-translate-y-1 hover:shadow-lg dark:border-[#34483b] dark:bg-[#203329]"
+                  className="flex min-h-[560px] flex-col overflow-hidden rounded-xl border border-[#dce8dc] bg-white transition-all hover:-translate-y-1 hover:shadow-lg dark:border-[#34483b] dark:bg-[#203329]"
                 >
                   {/* Event Image */}
-                  <div className="relative h-52 w-full">
+                  <div className="relative h-52 w-full shrink-0">
                     <Image
                       src={event.imageUrl}
                       alt={event.title}
@@ -78,36 +79,42 @@ const HomeUpcomingEvent = async () => {
                   </div>
 
                   {/* Event Information */}
-                  <div className="p-5">
+                  <div className="flex flex-1 flex-col p-5">
 
-                    <span className="inline-block rounded-full bg-[#e6f0eb] px-3 py-1 text-xs font-medium text-[#34745b] dark:bg-[#263a2d] dark:text-[#a8c9ae]">
+                    {/* Event Type */}
+                    <span className="inline-block w-fit shrink-0 rounded-full bg-[#e6f0eb] px-3 py-1 text-xs font-medium text-[#34745b] dark:bg-[#263a2d] dark:text-[#a8c9ae]">
                       {event.eventType}
                     </span>
 
-                    <h3 className="mt-4 line-clamp-2 text-lg font-semibold text-[#173c2d] dark:text-[#edf4ed]">
+                    {/* Event Title */}
+                    <h3 className="mt-4 min-h-[3.5rem] text-lg font-semibold leading-7 text-[#173c2d] line-clamp-2 dark:text-[#edf4ed]">
                       {event.title}
                     </h3>
 
-                    <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#637268] dark:text-[#aab9ad]">
+                    {/* Event Description */}
+                    <p className="mt-2 min-h-[3rem] text-sm leading-6 text-[#637268] line-clamp-2 dark:text-[#aab9ad]">
                       {event.description}
                     </p>
 
-                    <div className="mt-5 space-y-3 border-t border-[#e5ece5] pt-4 dark:border-[#405345]">
+                    {/* Date and Location */}
+                    <div className="mt-5 space-y-4 border-t border-[#e5ece5] pt-4 dark:border-[#405345]">
 
-                      <div className="flex items-center gap-2 text-sm text-[#637268] dark:text-[#aab9ad]">
-                        <CalendarDays className="size-4 text-[#34745b] dark:text-[#a8c9ae]" />
-                        {formatDate(event.eventDate)}
+                      <div className="flex min-h-5 items-center gap-2 text-sm text-[#637268] dark:text-[#aab9ad]">
+                        <CalendarDays className="size-4 shrink-0 text-[#34745b] dark:text-[#a8c9ae]" />
+                        <span>{formatDate(event.eventDate)}</span>
                       </div>
 
-                      <div className="flex items-center gap-2 text-sm text-[#637268] dark:text-[#aab9ad]">
-                        <MapPin className="size-4 text-[#34745b] dark:text-[#a8c9ae]" />
+                      <div className="flex min-h-5 items-center gap-2 text-sm text-[#637268] dark:text-[#aab9ad]">
+                        <MapPin className="size-4 shrink-0 text-[#34745b] dark:text-[#a8c9ae]" />
                         <span className="line-clamp-1">{event.location}</span>
                       </div>
+
                     </div>
 
+                    {/* View Details Button */}
                     <Link
                       href={`/upcoming-events/${event._id}`}
-                      className="mt-5 flex h-10 w-full items-center justify-center gap-2 rounded-md bg-[#194635] text-sm font-medium text-white transition-colors hover:bg-[#14372a] dark:bg-[#8fa995] dark:text-[#17251c] dark:hover:bg-[#a5bba9]"
+                      className="mt-auto flex h-10 w-full shrink-0 items-center justify-center gap-2 rounded-md bg-[#194635] text-sm font-medium text-white transition-colors hover:bg-[#14372a] dark:bg-[#8fa995] dark:text-[#17251c] dark:hover:bg-[#a5bba9]"
                     >
                       View Details
                       <ArrowRight className="size-4" />
@@ -120,9 +127,11 @@ const HomeUpcomingEvent = async () => {
           ) : (
             <div className="py-16 text-center">
               <CalendarDays className="mx-auto size-10 text-[#8fa995] dark:text-[#a8c9ae]" />
+
               <h3 className="mt-4 text-lg font-semibold text-[#173c2d] dark:text-[#edf4ed]">
                 No Upcoming Events
               </h3>
+
               <p className="mt-2 text-sm text-[#637268] dark:text-[#aab9ad]">
                 New community events will appear here soon.
               </p>
