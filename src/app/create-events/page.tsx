@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const eventTypes = [
   "Cleanup",
@@ -53,6 +54,10 @@ export default function CreateEventPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
+  
+  
+
+
   const [form, setForm] = useState(initialForm);
   const [imageError, setImageError] = useState(false);
 
@@ -71,6 +76,8 @@ export default function CreateEventPage() {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+
+    
 
     // Check whether the user is logged in
     if (!user) {
@@ -99,11 +106,16 @@ export default function CreateEventPage() {
       return;
     }
 
+    // JWT client components
+    
+    const token = await getTokenFromClient()
+
     try {
-      const res = await fetch("http://localhost:8000/create-events", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...form,
@@ -121,6 +133,7 @@ export default function CreateEventPage() {
 
       toast.success("Event created successfully!");
       setForm(initialForm);
+      router.push('/upcoming-events')
     } catch (error) {
       console.error("Error creating event:", error);
       toast.error("Something went wrong. Please try again.");

@@ -12,6 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -25,10 +26,17 @@ type DeleteEventDialogProps = {
 };
 
 const handleDeleteEvent = async ({ data }: DeleteEventDialogProps) => {
+  // JWT client components
+  const token = await getTokenFromClient()
+  
   const res = await fetch(
-    `http://localhost:8000/upcoming-events/${data._id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/upcoming-events/${data._id}`,
     {
       method: "DELETE",
+      headers:{
+        authorization: `Bearer ${token}`,
+      }
+      
     }
   );
 

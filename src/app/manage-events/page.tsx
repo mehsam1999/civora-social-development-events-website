@@ -25,6 +25,7 @@ import DeleteEventDialog from "@/components/dialog/DeleteEventDialog";
 import { IUserManageEvent } from "@/lib/types/userManageEvents";
 import { authClient } from "@/lib/auth-client";
 import { notFound } from "next/navigation";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const ManageEventPage = () => {
   const { data: session, isPending } = authClient.useSession();
@@ -41,10 +42,16 @@ const ManageEventPage = () => {
     if (isPending) return;
 
     const fetchEvents = async () => {
+      // JWT client components
+      const token = await getTokenFromClient()
+      
       try {
         const res = await fetch(
-          `http://localhost:8000/manage-events/${user?.email}`
-        );
+          `${process.env.NEXT_PUBLIC_API_URL}/manage-events/${user?.email}`,{
+            headers: {
+            authorization: `Bearer ${token}`,
+          }
+          });
 
         if (!res.ok) {
           notFound()

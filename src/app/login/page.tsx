@@ -27,6 +27,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { auth } from "@/lib/auth";
 
 export default function SignInForm() {
   const router = useRouter();

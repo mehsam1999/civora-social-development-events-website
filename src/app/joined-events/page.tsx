@@ -1,6 +1,7 @@
 
 import JoinEventDetailsCard from "@/components/joined event card/JoinEventDetailsCard";
 import { auth } from "@/lib/auth";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 import { IUserJoinedEvent } from "@/lib/types/userJoinedEvents";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { headers } from "next/headers";
@@ -11,11 +12,20 @@ const JoinedEventButtonPage = async () => {
     headers: await headers(),
   });
 
-  const user = session?.user;
+const user = session?.user;
 
-  const res = await fetch(
-    `http://localhost:8000/joined-event/${user?.email}`
-  );
+//JWT server components
+const token = await getTokenFromServer()
+
+const res = await fetch(
+  `${process.env.NEXT_PUBLIC_API_URL}/joined-event/${user?.email}`,
+  {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  }
+);
+
 
   const joinedEvents: IUserJoinedEvent[] = await res.json();
 

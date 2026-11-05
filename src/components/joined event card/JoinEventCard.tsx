@@ -2,6 +2,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 import { IEvent } from "@/lib/types/events";
 import { CalendarDays, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -33,10 +34,14 @@ const JoinEventCard = ({ event }: { event: IEvent }) => {
     };
 
     try {
-      const res = await fetch("http://localhost:8000/joined-events", {
+      // jwt client components
+      const token = await getTokenFromClient()
+      
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/joined-events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });

@@ -50,7 +50,7 @@ const UpcomingEventPage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:8000/upcoming-events");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upcoming-events`);
 
         if (!res.ok) {
           notFound()

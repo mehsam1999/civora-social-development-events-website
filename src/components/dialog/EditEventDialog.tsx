@@ -38,6 +38,7 @@ import {
 } from "@/components/ui/select";
 
 import { toast } from "sonner";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 type Event = {
   _id: string;
@@ -118,13 +119,16 @@ const EditEventDialog = ({ data }: EditEventDialogProps) => {
       toast.error("Please provide a valid image URL.");
       return;
     }
-
+    //JWT client
+    const token = await getTokenFromClient()
+    
     const res = await fetch(
-      `http://localhost:8000/upcoming-events/${data._id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/upcoming-events/${data._id}`,
       {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(form),
       }

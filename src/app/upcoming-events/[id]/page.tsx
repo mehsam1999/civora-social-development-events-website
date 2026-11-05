@@ -51,7 +51,7 @@ const UpcomingEventDetails = async ({
 }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:8000/upcoming-events/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upcoming-events/${id}`);
   const event: IEvent = await res.json();
 
   const organizer =
