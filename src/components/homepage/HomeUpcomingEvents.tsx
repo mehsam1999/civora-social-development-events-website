@@ -31,8 +31,12 @@ const HomeUpcomingEvent = async () => {
           {/* Section Header */}
           <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="mb-3 text-xs font-semibold tracking-[0.15em] text-[#34745b] dark:text-[#a8c9ae]">
-                MAKE A DIFFERENCE
+            <p className="flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.18em] text-[#6b746c] uppercase dark:text-[#aab9ad] my-4">
+            <span
+              aria-hidden="true"
+              className="size-2 rounded-full bg-[#c15f3c]"
+            />
+            MAKE A DIFFERENCE
               </p>
 
               <h2 className="font-heading text-3xl font-medium text-[#173c2d] sm:text-4xl dark:text-[#edf4ed]">
