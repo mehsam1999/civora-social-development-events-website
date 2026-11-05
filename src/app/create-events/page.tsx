@@ -180,7 +180,8 @@ export default function CreateEventPage() {
             </div>
 
             <div className="relative">
-              <CalendarDays className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#78877c] dark:text-[#8fa995]" />
+              <CalendarDays className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#78877c] dark:text-[#8fa995]" />
+
               <Input
                 id="title"
                 value={form.title}
@@ -188,7 +189,7 @@ export default function CreateEventPage() {
                 placeholder="e.g. Winter Blanket & Food Distribution"
                 minLength={5}
                 required
-                className="h-11 rounded-none border-[#e2e9e1] text-sm dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
+                className="h-11 rounded-none border-[#e2e9e1] pl-10 text-sm dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
               />
             </div>
           </div>
