@@ -1,10 +1,12 @@
 
 "use client";
+
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@/components/ui/avatar";
+
 import {
   Popover,
   PopoverContent,
@@ -12,11 +14,12 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Sun, Home, ChevronRight, LogOut, UserRound } from "lucide-react";
+import { Home, ChevronRight, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import {
@@ -27,9 +30,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useState } from "react";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -40,19 +45,22 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const hoverStyle = "hover:bg-[#e0ebe3] hover:text-[#1a4332]";
 
-  const { data: session } = authClient.useSession()
-  const user = session?.user
-  // console.log(user)
+  const hoverStyle =
+    "hover:bg-[#e0ebe3] hover:text-[#1a4332] dark:hover:bg-[#2b4435] dark:hover:text-[#edf4ed]";
 
-  const handleEmailSignOut = () =>{
-    authClient.signOut()
-    toast.success("You have successfully signed out")
-    router.push('/')
-  }
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  // Sign Out
+  const handleEmailSignOut = async () => {
+    await authClient.signOut();
+    toast.success("You have successfully signed out");
+    router.push("/");
+  };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-[#faf8f5]/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-[#faf8f5]/90 backdrop-blur dark:border-white/[0.08] dark:bg-[#111c16]/90">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-5 sm:px-8">
 
         {/* Main Navbar */}
@@ -75,10 +83,11 @@ export function Navbar() {
               />
 
               <div className="flex flex-col">
-                <h2 className="text-2xl font-bold text-[#1a4332]">
+                <h2 className="text-2xl font-bold text-[#1a4332] dark:text-[#edf4ed]">
                   CIVORA
                 </h2>
-                <p className="text-xs tracking-wide text-[#3f4a43]">
+
+                <p className="text-xs tracking-wide text-[#3f4a43] dark:text-[#aab9ad]">
                   DHAKA CIVIC TRUST
                 </p>
               </div>
@@ -104,8 +113,8 @@ export function Navbar() {
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-[#1a4332] text-white shadow-sm"
-                      : `text-[#3f4a43] ${hoverStyle}`
+                      ? "bg-[#1a4332] text-white shadow-sm dark:bg-[#8fa995] dark:text-[#14251a]"
+                      : `text-[#3f4a43] dark:text-[#c2cec4] ${hoverStyle}`
                   )}
                 >
                   {link.label}
@@ -118,79 +127,69 @@ export function Navbar() {
           <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
 
             {/* Theme Toggle */}
-            <button
-              type="button"
-              aria-label="Toggle theme"
-              className={`flex size-9 items-center justify-center rounded-full text-[#3f4a43] transition-colors ${hoverStyle}`}
-            >
-              <Sun size={18} strokeWidth={1.8} />
-            </button>
+            <ThemeToggle />
 
-            {
-              user ? 
-              
+            {user ? (
               <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger render={
-                  <Avatar className="size-10 cursor-pointer border-2 border-[#1a4332]">
-                    <AvatarImage
-                      src={user?.image || ""}
-                      alt={user?.name || "User"}
-                    />
-                    <AvatarFallback className="bg-[#e0ebe3] font-semibold text-[#1a4332]">
-                      {user?.name?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                }>
-                </PopoverTrigger>
+                <PopoverTrigger
+                  render={
+                    <Avatar className="size-10 cursor-pointer border-2 border-[#1a4332] dark:border-[#8fa995]">
+                      <AvatarImage
+                        src={user?.image || ""}
+                        alt={user?.name || "User"}
+                      />
 
+                      <AvatarFallback className="bg-[#e0ebe3] font-semibold text-[#1a4332] dark:bg-[#2b4435] dark:text-[#edf4ed]">
+                        {user?.name?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                  }
+                />
                 <PopoverContent
                   align="end"
-                  className="w-64 rounded-md border border-[#e5ebe4] bg-[#faf8f5] p-0 shadow-[0_8px_25px_rgba(28,43,35,0.12)]"
+                  className="w-64 rounded-md border border-[#e5ebe4] bg-[#faf8f5] p-0 shadow-[0_8px_25px_rgba(28,43,35,0.12)] dark:border-[#34483b] dark:bg-[#1c2b22]"
                 >
                   <PopoverHeader className="space-y-1 p-4">
-                    <PopoverTitle className="text-sm font-semibold text-[#1a4332]">
+                    <PopoverTitle className="text-sm font-semibold text-[#1a4332] dark:text-[#edf4ed]">
                       {user?.name}
                     </PopoverTitle>
 
-                    <PopoverDescription className="text-xs text-[#6b746c]">
+                    <PopoverDescription className="text-xs text-[#6b746c] dark:text-[#aab9ad]">
                       {user?.email}
                     </PopoverDescription>
                   </PopoverHeader>
 
-                  <div className="border-t border-[#e5ebe4]" />
+                  <div className="border-t border-[#e5ebe4] dark:border-[#34483b]" />
 
                   <div className="flex flex-col p-2">
 
                     <Link
                       href="/create-events"
                       onClick={() => setOpen(false)}
-                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332]"
+                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332] dark:text-[#c2cec4] dark:hover:bg-[#2b4435] dark:hover:text-[#edf4ed]"
                     >
-                      
                       Create An Event
                     </Link>
 
                     <Link
                       href="/manage-events"
                       onClick={() => setOpen(false)}
-                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332]"
+                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332] dark:text-[#c2cec4] dark:hover:bg-[#2b4435] dark:hover:text-[#edf4ed]"
                     >
-                      
                       Manage Events
                     </Link>
 
                     <Link
                       href="/joined-events"
                       onClick={() => setOpen(false)}
-                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332]"
+                      className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332] dark:text-[#c2cec4] dark:hover:bg-[#2b4435] dark:hover:text-[#edf4ed]"
                     >
-                      
                       Joined Events
                     </Link>
 
                   </div>
 
-                  <div className="border-t border-[#e5ebe4]" />
+                  <div className="border-t border-[#e5ebe4] dark:border-[#34483b]" />
 
                   <div className="p-2">
                     <button
@@ -199,7 +198,7 @@ export function Navbar() {
                         setOpen(false);
                         handleEmailSignOut();
                       }}
-                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#b4533d] transition-colors hover:bg-[#fbe9e5]"
+                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#b4533d] transition-colors hover:bg-[#fbe9e5] dark:text-[#e99b87] dark:hover:bg-[#422a25]"
                     >
                       <LogOut className="size-4" />
                       Sign Out
@@ -207,7 +206,7 @@ export function Navbar() {
                   </div>
                 </PopoverContent>
               </Popover>
-              : 
+            ) : (
               <>
                 {/* Login */}
                 <Link
@@ -216,27 +215,27 @@ export function Navbar() {
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     pathname === "/login"
-                      ? "bg-[#1a4332] text-white shadow-sm"
-                      : `text-[#3f4a43] ${hoverStyle}`
+                      ? "bg-[#1a4332] text-white shadow-sm dark:bg-[#8fa995] dark:text-[#14251a]"
+                      : `text-[#3f4a43] dark:text-[#c2cec4] ${hoverStyle}`
                   )}
                 >
                   Log In
                 </Link>
               </>
-            }
+            )}
 
           </div>
         </div>
 
         {/* Mobile Breadcrumb Navigation */}
-        <div className="border-t border-black/[0.05] py-3 md:hidden">
+        <div className="border-t border-black/[0.05] py-3 dark:border-white/[0.08] md:hidden">
           <Breadcrumb>
             <BreadcrumbList className="gap-2 text-xs">
 
               {/* Home */}
               <BreadcrumbItem>
                 {pathname === "/" ? (
-                  <BreadcrumbPage className="text-[#1a4332]">
+                  <BreadcrumbPage className="text-[#1a4332] dark:text-[#8fa995]">
                     <Home className="size-4" />
                     <span className="sr-only">Home</span>
                   </BreadcrumbPage>
@@ -244,7 +243,7 @@ export function Navbar() {
                   <BreadcrumbLink
                     href="/"
                     aria-label="Home"
-                    className="text-[#5c665e] transition-colors hover:text-[#1a4332]"
+                    className="text-[#5c665e] transition-colors hover:text-[#1a4332] dark:text-[#aab9ad] dark:hover:text-[#edf4ed]"
                   >
                     <Home className="size-4" />
                   </BreadcrumbLink>
@@ -252,19 +251,19 @@ export function Navbar() {
               </BreadcrumbItem>
 
               <BreadcrumbSeparator>
-                <ChevronRight className="size-3 text-[#a0aaa1]" />
+                <ChevronRight className="size-3 text-[#a0aaa1] dark:text-[#66786a]" />
               </BreadcrumbSeparator>
 
               {/* Upcoming Events */}
               <BreadcrumbItem>
                 {pathname.startsWith("/upcoming-events") ? (
-                  <BreadcrumbPage className="font-medium text-[#1a4332]">
+                  <BreadcrumbPage className="font-medium text-[#1a4332] dark:text-[#8fa995]">
                     Upcoming Events
                   </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink
                     href="/upcoming-events"
-                    className="font-medium text-[#5c665e] transition-colors hover:text-[#1a4332]"
+                    className="font-medium text-[#5c665e] transition-colors hover:text-[#1a4332] dark:text-[#aab9ad] dark:hover:text-[#edf4ed]"
                   >
                     Upcoming Events
                   </BreadcrumbLink>

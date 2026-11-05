@@ -58,55 +58,53 @@ export default function SignUpForm() {
     const formData = new FormData(e.currentTarget);
 
     const user = Object.fromEntries(formData.entries()) as {
-    name: string;
-    email: string;
-    password: string;
-    photo: string;
+      name: string;
+      email: string;
+      password: string;
+      photo: string;
     };
 
     const { data, error } = await authClient.signUp.email({
-    name: user.name,
-    email: user.email,
-    password: user.password,
-    image: user.photo || undefined,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      image: user.photo || undefined,
     });
 
     if (data) {
-    toast.success("You have successfully created your account");
-    router.push("/");
+      toast.success("You have successfully created your account");
+      router.push("/");
     }
 
     if (error) {
-    toast.error(error.message || "Create account failed!");
+      toast.error(error.message || "Create account failed!");
     }
   };
-  const handleGoogleSignup = async()=>{
+
+  const handleGoogleSignup = async () => {
     const data = await authClient.signIn.social({
-    provider: "google",
-  });
-  }
+      provider: "google",
+    });
+  };
 
   return (
-    <main className="flex py-20 flex-col items-center justify-center bg-[#f1faf1] px-4">
-
+    <main className="flex py-20 flex-col items-center justify-center bg-[#f1faf1] px-4 transition-colors dark:bg-[#17251c]">
       <div className="w-full max-w-md">
-
-        <Card className="rounded-md border border-[#e5eee5] bg-white px-5 py-6 shadow-none sm:px-7">
+        <Card className="rounded-md border border-[#e5eee5] bg-white px-5 py-6 shadow-none transition-colors sm:px-7 dark:border-[#34483b] dark:bg-[#203329]">
 
           {/* Header */}
           <CardHeader className="mb-5 space-y-2 p-0 text-center">
-            <h1 className="font-heading text-2xl font-semibold tracking-tight text-[#163a2b]">
+            <h1 className="font-heading text-2xl font-semibold tracking-tight text-[#163a2b] dark:text-[#edf4ed]">
               Create Your Account
             </h1>
 
-            <p className="mx-auto max-w-[280px] text-xs leading-5 text-[#5c665e]">
+            <p className="mx-auto max-w-[280px] text-xs leading-5 text-[#5c665e] dark:text-[#aab9ad]">
               Join CIVORA and become part of a community
               creating positive change.
             </p>
           </CardHeader>
 
           <CardContent className="p-0">
-
             <form onSubmit={handleEmailSignup}>
               <FieldGroup className="gap-4">
 
@@ -114,13 +112,13 @@ export default function SignUpForm() {
                 <Field className="gap-2">
                   <FieldLabel
                     htmlFor="name"
-                    className="text-[11px] font-semibold text-[#1c2b23]"
+                    className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                   >
                     Full Name
                   </FieldLabel>
 
                   <div className="relative">
-                    <User className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980]" />
+                    <User className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980] dark:text-[#8fa995]" />
 
                     <Input
                       id="name"
@@ -128,7 +126,7 @@ export default function SignUpForm() {
                       type="text"
                       placeholder="Enter your full name"
                       required
-                      className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                      className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs text-[#1c2b23] shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                     />
                   </div>
                 </Field>
@@ -137,13 +135,13 @@ export default function SignUpForm() {
                 <Field className="gap-2">
                   <FieldLabel
                     htmlFor="email"
-                    className="text-[11px] font-semibold text-[#1c2b23]"
+                    className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                   >
                     Email Address
                   </FieldLabel>
 
                   <div className="relative">
-                    <Mail className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980]" />
+                    <Mail className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980] dark:text-[#8fa995]" />
 
                     <Input
                       id="email"
@@ -151,7 +149,7 @@ export default function SignUpForm() {
                       type="email"
                       placeholder="Enter your email address"
                       required
-                      className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                      className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs text-[#1c2b23] shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                     />
                   </div>
                 </Field>
@@ -161,7 +159,7 @@ export default function SignUpForm() {
                   <div className="flex items-center justify-between">
                     <FieldLabel
                       htmlFor="photo"
-                      className="text-[11px] font-semibold text-[#1c2b23]"
+                      className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                     >
                       Profile Photo URL
                     </FieldLabel>
@@ -169,18 +167,18 @@ export default function SignUpForm() {
 
                   <div className="flex items-center gap-2">
                     <div className="relative flex-1">
-                      <Link2 className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980]" />
+                      <Link2 className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980] dark:text-[#8fa995]" />
 
                       <Input
                         id="photo"
                         name="photo"
                         type="url"
                         placeholder="Paste your profile photo URL"
-                        className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                        className="h-9 rounded-sm border-0 bg-transparent pl-9 text-xs text-[#1c2b23] shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                       />
                     </div>
 
-                    <div className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-[#e5eee5] text-[#62766a]">
+                    <div className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-[#e5eee5] text-[#62766a] dark:bg-[#344d3b] dark:text-[#c5d8c7]">
                       <CircleUserRound className="size-4" />
                     </div>
                   </div>
@@ -190,13 +188,13 @@ export default function SignUpForm() {
                 <Field className="gap-2">
                   <FieldLabel
                     htmlFor="password"
-                    className="text-[11px] font-semibold text-[#1c2b23]"
+                    className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                   >
                     Password
                   </FieldLabel>
 
                   <div className="relative">
-                    <LockKeyhole className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980]" />
+                    <LockKeyhole className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7b8980] dark:text-[#8fa995]" />
 
                     <Input
                       id="password"
@@ -206,13 +204,13 @@ export default function SignUpForm() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="h-9 rounded-sm border-0 bg-transparent px-9 pr-10 text-xs shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                      className="h-9 rounded-sm border-0 bg-transparent px-9 pr-10 text-xs text-[#1c2b23] shadow-none placeholder:text-[#b3bdb6] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                     />
 
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute top-1/2 right-3 -translate-y-1/2 text-[#7b8980] transition-colors hover:text-[#1a4332]"
+                      className="absolute top-1/2 right-3 -translate-y-1/2 text-[#7b8980] transition-colors hover:text-[#1a4332] dark:text-[#8fa995] dark:hover:text-[#edf4ed]"
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? (
@@ -225,23 +223,24 @@ export default function SignUpForm() {
                 </Field>
 
                 {/* Password Requirements */}
-                <div className="rounded-sm bg-[#edf5ed] px-2 py-2">
-                  <p className="mb-1.5 text-[9px] font-medium tracking-wide text-[#65766a] uppercase">
+                <div className="rounded-sm bg-[#edf5ed] px-2 py-2 dark:bg-[#263a2d]">
+                  <p className="mb-1.5 text-[9px] font-medium tracking-wide text-[#65766a] uppercase dark:text-[#aab9ad]">
                     Password Requirements
                   </p>
 
                   <div className="space-y-1 text-[10px]">
-
                     <p
                       className={`flex items-center gap-1.5 ${
-                        hasMinLength ? "text-green-700" : "text-[#46564b]"
+                        hasMinLength
+                          ? "text-green-700 dark:text-green-400"
+                          : "text-[#46564b] dark:text-[#bdcabe]"
                       }`}
                     >
                       <span
                         className={`size-2 rounded-full border ${
                           hasMinLength
                             ? "border-green-600 bg-green-600"
-                            : "border-[#7b8980]"
+                            : "border-[#7b8980] dark:border-[#8fa995]"
                         }`}
                       />
                       At least 6 characters
@@ -249,14 +248,16 @@ export default function SignUpForm() {
 
                     <p
                       className={`flex items-center gap-1.5 ${
-                        hasUppercase ? "text-green-700" : "text-[#46564b]"
+                        hasUppercase
+                          ? "text-green-700 dark:text-green-400"
+                          : "text-[#46564b] dark:text-[#bdcabe]"
                       }`}
                     >
                       <span
                         className={`size-2 rounded-full border ${
                           hasUppercase
                             ? "border-green-600 bg-green-600"
-                            : "border-[#7b8980]"
+                            : "border-[#7b8980] dark:border-[#8fa995]"
                         }`}
                       />
                       At least one uppercase letter
@@ -264,32 +265,33 @@ export default function SignUpForm() {
 
                     <p
                       className={`flex items-center gap-1.5 ${
-                        hasLowercase ? "text-green-700" : "text-[#46564b]"
+                        hasLowercase
+                          ? "text-green-700 dark:text-green-400"
+                          : "text-[#46564b] dark:text-[#bdcabe]"
                       }`}
                     >
                       <span
                         className={`size-2 rounded-full border ${
                           hasLowercase
                             ? "border-green-600 bg-green-600"
-                            : "border-[#7b8980]"
+                            : "border-[#7b8980] dark:border-[#8fa995]"
                         }`}
                       />
                       At least one lowercase letter
                     </p>
-
                   </div>
                 </div>
 
                 {/* Create Account Button */}
                 <Button
                   type="submit"
-                  className="mt-1 h-10 w-full rounded-sm bg-[#163f32] text-xs font-semibold text-white shadow-none hover:bg-[#24513c]"
+                  className="mt-1 h-10 w-full rounded-sm bg-[#163f32] text-xs font-semibold text-white shadow-none hover:bg-[#24513c] dark:bg-[#8fa995] dark:text-[#14251a] dark:hover:bg-[#a5bba9]"
                 >
                   Create Account
                   <ArrowRight className="ml-1 size-3.5" />
                 </Button>
 
-                <FieldSeparator className="text-[9px] tracking-widest text-[#7b8980] [&_[data-slot=field-separator-content]]:bg-white">
+                <FieldSeparator className="text-[9px] tracking-widest text-[#7b8980] [&_[data-slot=field-separator-content]]:bg-white dark:text-[#8fa995] dark:[&_[data-slot=field-separator-content]]:bg-[#203329]">
                   OR
                 </FieldSeparator>
 
@@ -298,7 +300,7 @@ export default function SignUpForm() {
                   type="button"
                   variant="outline"
                   onClick={handleGoogleSignup}
-                  className="h-10 w-full rounded-sm border-0 bg-transparent text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4]"
+                  className="h-10 w-full rounded-sm border-0 bg-transparent text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4] dark:text-[#edf4ed] dark:hover:bg-[#34483b]"
                 >
                   <svg
                     viewBox="0 0 48 48"
@@ -327,11 +329,11 @@ export default function SignUpForm() {
                 </Button>
 
                 {/* Login Link */}
-                <FieldDescription className="pt-1 text-center text-[11px] text-[#5c665e]">
+                <FieldDescription className="pt-1 text-center text-[11px] text-[#5c665e] dark:text-[#aab9ad]">
                   Already have an account?{" "}
                   <Link
                     href="/login"
-                    className="font-semibold text-[#a64e3d] hover:underline"
+                    className="font-semibold text-[#a64e3d] hover:underline dark:text-[#e99b87]"
                   >
                     Log In
                   </Link>
@@ -342,10 +344,9 @@ export default function SignUpForm() {
           </CardContent>
         </Card>
 
-        <p className="mt-5 text-center text-[9px] font-medium tracking-[0.13em] text-[#718075] uppercase">
+        <p className="mt-5 text-center text-[9px] font-medium tracking-[0.13em] text-[#718075] uppercase dark:text-[#8fa995]">
           Institutional Node · Dhaka Public Records Registry
         </p>
-
       </div>
     </main>
   );

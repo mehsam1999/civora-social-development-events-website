@@ -70,21 +70,20 @@ export default function SignInForm() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center bg-[#f1faf1] px-4 py-20">
-
+    <main className="flex flex-col items-center justify-center bg-[#f1faf1] px-4 py-20 transition-colors dark:bg-[#17251c]">
       <div className="w-full max-w-md">
 
-        <Card className="overflow-hidden rounded-md border border-[#e5eee5] bg-white pt-0 shadow-none">
+        <Card className="overflow-hidden rounded-md border border-[#e5eee5] bg-white pt-0 shadow-none transition-colors dark:border-[#34483b] dark:bg-[#203329]">
 
           <CardContent className="px-6 pt-8 sm:px-9 sm:pt-9">
 
             {/* Header */}
             <div className="mb-6 space-y-2 text-center">
-              <h1 className="font-heading text-2xl font-semibold tracking-tight text-[#163a2b] sm:text-3xl">
+              <h1 className="font-heading text-2xl font-semibold tracking-tight text-[#163a2b] sm:text-3xl dark:text-[#edf4ed]">
                 Welcome Back
               </h1>
 
-              <p className="mx-auto max-w-[280px] text-xs leading-5 text-[#5c665e]">
+              <p className="mx-auto max-w-[280px] text-xs leading-5 text-[#5c665e] dark:text-[#aab9ad]">
                 Sign in to continue making a difference in your
                 community.
               </p>
@@ -97,13 +96,13 @@ export default function SignInForm() {
                 <Field className="gap-2">
                   <FieldLabel
                     htmlFor="email"
-                    className="text-[11px] font-semibold text-[#1c2b23]"
+                    className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                   >
                     Email Address
                   </FieldLabel>
 
                   <div className="relative">
-                    <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#46564b]" />
+                    <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#46564b] dark:text-[#8fa995]" />
 
                     <Input
                       id="email"
@@ -111,7 +110,7 @@ export default function SignInForm() {
                       type="email"
                       placeholder="Enter your email address"
                       required
-                      className="h-10 rounded-sm border-[#edf0ed] bg-white pl-9 text-xs shadow-none placeholder:text-[#9ba59e] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                      className="h-10 rounded-sm border-[#edf0ed] bg-white pl-9 text-xs text-[#1c2b23] shadow-none placeholder:text-[#9ba59e] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                     />
                   </div>
                 </Field>
@@ -120,13 +119,13 @@ export default function SignInForm() {
                 <Field className="gap-2">
                   <FieldLabel
                     htmlFor="password"
-                    className="text-[11px] font-semibold text-[#1c2b23]"
+                    className="text-[11px] font-semibold text-[#1c2b23] dark:text-[#dce8dd]"
                   >
                     Password
                   </FieldLabel>
 
                   <div className="relative">
-                    <LockKeyhole className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#46564b]" />
+                    <LockKeyhole className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#46564b] dark:text-[#8fa995]" />
 
                     <Input
                       id="password"
@@ -134,14 +133,14 @@ export default function SignInForm() {
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
                       required
-                      className="h-10 rounded-sm border-[#edf0ed] bg-white px-9 pr-10 text-xs shadow-none placeholder:text-[#9ba59e] focus-visible:ring-1 focus-visible:ring-[#8fa995]"
+                      className="h-10 rounded-sm border-[#edf0ed] bg-white px-9 pr-10 text-xs text-[#1c2b23] shadow-none placeholder:text-[#9ba59e] focus-visible:ring-1 focus-visible:ring-[#8fa995] dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#edf4ed] dark:placeholder:text-[#78877c]"
                     />
 
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? "Hide password" : "Show password"}
-                      className="absolute top-1/2 right-3 -translate-y-1/2 text-[#46564b] hover:text-[#1a4332]"
+                      className="absolute top-1/2 right-3 -translate-y-1/2 text-[#46564b] transition-colors hover:text-[#1a4332] dark:text-[#8fa995] dark:hover:text-[#edf4ed]"
                     >
                       {showPassword ? (
                         <EyeOff className="size-4" />
@@ -152,18 +151,17 @@ export default function SignInForm() {
                   </div>
                 </Field>
 
-
                 {/* Sign In Button */}
                 <Button
                   type="submit"
-                  className="h-10 w-full rounded-sm bg-[#163f32] text-sm font-semibold text-white shadow-sm hover:bg-[#24513c]"
+                  className="h-10 w-full rounded-sm bg-[#163f32] text-sm font-semibold text-white shadow-sm hover:bg-[#24513c] dark:bg-[#8fa995] dark:text-[#14251a] dark:hover:bg-[#a5bba9]"
                 >
                   Sign In
                   <ArrowRight className="ml-1 size-4" />
                 </Button>
 
                 {/* Separator */}
-                <FieldSeparator className="text-[9px] tracking-widest text-[#5c665e] [&_[data-slot=field-separator-content]]:bg-white">
+                <FieldSeparator className="text-[9px] tracking-widest text-[#5c665e] [&_[data-slot=field-separator-content]]:bg-white dark:text-[#8fa995] dark:[&_[data-slot=field-separator-content]]:bg-[#203329]">
                   OR
                 </FieldSeparator>
 
@@ -172,7 +170,7 @@ export default function SignInForm() {
                   type="button"
                   variant="outline"
                   onClick={handleGoogleLogin}
-                  className="h-10 w-full rounded-sm border border-[#edf0ed] bg-white text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4]"
+                  className="h-10 w-full rounded-sm border border-[#edf0ed] bg-white text-xs font-medium text-[#1c2b23] shadow-none hover:bg-[#f5f8f4] dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#edf4ed] dark:hover:bg-[#34483b]"
                 >
                   <svg
                     viewBox="0 0 48 48"
@@ -205,12 +203,12 @@ export default function SignInForm() {
           </CardContent>
 
           {/* Sign Up Link */}
-          <div className="px-4 py-4 text-center flex  justify-center">
-            <FieldDescription className="text-[11px] text-[#5c665e]">
+          <div className="flex justify-center px-4 py-4">
+            <FieldDescription className="text-[11px] text-[#5c665e] dark:text-[#aab9ad]">
               Don&apos;t have an account?{" "}
               <Link
                 href="/signup"
-                className="font-semibold text-[#963f27] hover:underline"
+                className="font-semibold text-[#963f27] hover:underline dark:text-[#e99b87]"
               >
                 Create an account
               </Link>
@@ -219,10 +217,12 @@ export default function SignInForm() {
 
         </Card>
 
-        
-        <p className="mt-5 text-center text-[9px] leading-4 tracking-wide text-[#5c665e]">
+        <p className="mt-5 text-center text-[9px] leading-4 tracking-wide text-[#5c665e] dark:text-[#8fa995]">
           © 2025 CIVORA Foundation · Dhaka Civic Development Initiative ·{" "}
-          <Link href="" className="underline underline-offset-2">
+          <Link
+            href=""
+            className="underline underline-offset-2 hover:text-[#1a4332] dark:hover:text-[#edf4ed]"
+          >
             Privacy & Terms
           </Link>
         </p>

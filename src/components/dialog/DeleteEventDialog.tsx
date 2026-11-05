@@ -1,4 +1,5 @@
-"use client"
+
+"use client";
 
 import {
   AlertDialog,
@@ -10,7 +11,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
+
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -21,6 +23,7 @@ type Event = {
 type DeleteEventDialogProps = {
   data: Event;
 };
+
 const handleDeleteEvent = async ({ data }: DeleteEventDialogProps) => {
   const res = await fetch(
     `http://localhost:8000/upcoming-events/${data._id}`,
@@ -40,50 +43,54 @@ const handleDeleteEvent = async ({ data }: DeleteEventDialogProps) => {
 };
 
 const DeleteEventDialog = ({ data }: DeleteEventDialogProps) => {
-    return (
-        <div>
-            <AlertDialog>
-                <AlertDialogTrigger render={<button
-                    type="button"
-                    className="flex h-8 items-center justify-center gap-1 rounded-sm bg-[#fbe9e5] px-2.5 text-[11px] font-medium text-[#a64e3d] transition-colors hover:bg-[#f5d8d1]"
-                  >
-                    <Trash2 className="size-3.5" />
-                    Delete
-                  </button>}>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="max-w-md rounded-lg border border-[#e5ebe4] bg-[#faf8f5] p-6">
-                <AlertDialogHeader className="gap-3">
-                    <div className="flex size-11 items-center justify-center rounded-full bg-[#fbe9e5]">
-                    <Trash2 className="size-5 text-[#b4533d]" />
-                    </div>
+  return (
+    <div>
+      <AlertDialog>
+        <AlertDialogTrigger
+          render={
+            <button
+              type="button"
+              className="flex h-8 items-center justify-center gap-1 rounded-sm bg-[#fbe9e5] px-2.5 text-[11px] font-medium text-[#a64e3d] transition-colors hover:bg-[#f5d8d1] dark:bg-[#422a25] dark:text-[#e99b87] dark:hover:bg-[#55352e]"
+            >
+              <Trash2 className="size-3.5" />
+              Delete
+            </button>
+          }
+        />
 
-                    <AlertDialogTitle className="text-lg font-bold text-[#1a4332]">
-                    Delete This Event?
-                    </AlertDialogTitle>
+        <AlertDialogContent className="max-w-md rounded-lg border border-[#e5ebe4] bg-[#faf8f5] p-6 dark:border-[#405345] dark:bg-[#17251c]">
+          <AlertDialogHeader className="gap-3">
+            <div className="flex size-11 items-center justify-center rounded-full bg-[#fbe9e5] dark:bg-[#422a25]">
+              <Trash2 className="size-5 text-[#b4533d] dark:text-[#e99b87]" />
+            </div>
 
-                    <AlertDialogDescription className="text-sm leading-6 text-[#5c665e]">
-                    Are you sure you want to permanently delete this event from CIVORA?
-                    This action cannot be undone, and the event will be removed from
-                    the event listings.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
+            <AlertDialogTitle className="text-lg font-bold text-[#1a4332] dark:text-[#edf4ed]">
+              Delete This Event?
+            </AlertDialogTitle>
 
-                <AlertDialogFooter className="mt-3 flex-row justify-end gap-2">
-                    <AlertDialogCancel className="h-10 rounded-sm border-[#dce6dc] bg-[#e5eee5] px-5 text-xs font-medium text-[#435c49] hover:bg-[#dce8dc] hover:text-[#234635]">
-                    Cancel
-                    </AlertDialogCancel>
+            <AlertDialogDescription className="text-sm leading-6 text-[#5c665e] dark:text-[#aab9ad]">
+              Are you sure you want to permanently delete this event from CIVORA?
+              This action cannot be undone, and the event will be removed from
+              the event listings.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
 
-                    <AlertDialogAction
-                    className="h-10 rounded-sm bg-[#b4533d] px-5 text-xs font-medium text-white hover:bg-[#963e2d]"
-                    onClick={() => handleDeleteEvent({ data })}
-                    >
-                    Confirm Delete
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
-        </div>
-    );
+          <AlertDialogFooter className="mt-3 flex-row justify-end gap-2">
+            <AlertDialogCancel className="h-10 rounded-sm border-[#dce6dc] bg-[#e5eee5] px-5 text-xs font-medium text-[#435c49] hover:bg-[#dce8dc] hover:text-[#234635] dark:border-[#405345] dark:bg-[#263a2d] dark:text-[#c2cec4] dark:hover:bg-[#344d3b] dark:hover:text-[#edf4ed]">
+              Cancel
+            </AlertDialogCancel>
+
+            <AlertDialogAction
+              className="h-10 rounded-sm bg-[#b4533d] px-5 text-xs font-medium text-white hover:bg-[#963e2d] dark:bg-[#a64e3d] dark:hover:bg-[#c15f3c]"
+              onClick={() => handleDeleteEvent({ data })}
+            >
+              Confirm Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  );
 };
 
 export default DeleteEventDialog;

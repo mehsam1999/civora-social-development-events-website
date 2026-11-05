@@ -1,5 +1,6 @@
 import { Banner } from "@/components/homepage/banner";
 import { Gallery } from "@/components/homepage/gallery";
+import HomeUpcomingEvent from "@/components/homepage/HomeUpcomingEvents";
 import { Newsletter } from "@/components/homepage/newsletter";
 import { Stats } from "@/components/homepage/stats";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <main className="flex-1">
         <Banner />
         <Stats />
+        <HomeUpcomingEvent />
         <Gallery />
         <Newsletter />
       </main>

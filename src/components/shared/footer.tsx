@@ -42,12 +42,7 @@ const socials = [
     label: "Google",
     href: "https://www.google.com/",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-        className="size-3.5"
-      >
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-3.5">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.09-1.92 3.27-4.74 3.27-8.1Z" />
         <path d="M12 23c2.97 0 5.46-.98 7.29-2.65l-3.57-2.77c-.99.66-2.25 1.06-3.72 1.06-2.86 0-5.28-1.93-6.15-4.53H2.16v2.84A11 11 0 0 0 12 23Z" />
         <path d="M5.85 14.11a6.6 6.6 0 0 1 0-4.22V7.05H2.16a11 11 0 0 0 0 9.9l3.69-2.84Z" />
@@ -61,20 +56,21 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-black/[0.05] bg-[#f4f6f1]">
+    <footer className="border-t border-black/[0.05] bg-[#f4f6f1] transition-colors dark:border-white/[0.08] dark:bg-[#111c16]">
       <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1.15fr] lg:gap-12">
+
           {/* Brand */}
           <div>
-            <p className="font-heading text-2xl tracking-tight text-[#163a2b]">
+            <p className="font-heading text-2xl tracking-tight text-[#163a2b] dark:text-[#edf4ed]">
               CIVORA
             </p>
 
-            <p className="mt-3 font-heading text-base text-[#3f4a43] italic">
+            <p className="mt-3 font-heading text-base text-[#3f4a43] italic dark:text-[#c2cec4]">
               Small Acts. Stronger Communities.
             </p>
 
-            <p className="mt-4 max-w-md text-sm leading-6 text-[#5c665e]">
+            <p className="mt-4 max-w-md text-sm leading-6 text-[#5c665e] dark:text-[#aab9ad]">
               CIVORA is a civic-engagement digital platform uniting local
               grassroots initiatives, passionate volunteers, and community
               organizers across Dhaka and beyond.
@@ -83,7 +79,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <nav aria-label="Footer">
-            <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase">
+            <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase dark:text-[#edf4ed]">
               Quick Civic Links
             </h2>
 
@@ -92,7 +88,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[#5c665e] transition-colors hover:text-[#1a4332]"
+                    className="text-sm text-[#5c665e] transition-colors hover:text-[#1a4332] dark:text-[#aab9ad] dark:hover:text-[#edf4ed]"
                   >
                     {link.label}
                   </Link>
@@ -103,15 +99,15 @@ export function Footer() {
 
           {/* Contact & Socials */}
           <div>
-            <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase">
+            <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase dark:text-[#edf4ed]">
               Contact &amp; Assembly
             </h2>
 
-            <ul className="mt-4 space-y-3 text-sm text-[#5c665e]">
+            <ul className="mt-4 space-y-3 text-sm text-[#5c665e] dark:text-[#aab9ad]">
               <li className="flex items-start gap-2.5">
                 <MapPin
                   aria-hidden="true"
-                  className="mt-0.5 size-4 shrink-0 text-[#3f4a43]"
+                  className="mt-0.5 size-4 shrink-0 text-[#3f4a43] dark:text-[#8fa995]"
                 />
                 <span>
                   Civic Action Hub, House 42, Road 11, Dhanmondi, Dhaka 1209,
@@ -122,11 +118,11 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail
                   aria-hidden="true"
-                  className="size-4 shrink-0 text-[#3f4a43]"
+                  className="size-4 shrink-0 text-[#3f4a43] dark:text-[#8fa995]"
                 />
                 <a
                   href="mailto:community@civora.org"
-                  className="transition-colors hover:text-[#1a4332]"
+                  className="transition-colors hover:text-[#1a4332] dark:hover:text-[#edf4ed]"
                 >
                   community@civora.org
                 </a>
@@ -135,18 +131,18 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <Phone
                   aria-hidden="true"
-                  className="size-4 shrink-0 text-[#3f4a43]"
+                  className="size-4 shrink-0 text-[#3f4a43] dark:text-[#8fa995]"
                 />
                 <a
                   href="tel:+88029876543"
-                  className="transition-colors hover:text-[#1a4332]"
+                  className="transition-colors hover:text-[#1a4332] dark:hover:text-[#edf4ed]"
                 >
                   +880 (2) 987-6543
                 </a>
               </li>
             </ul>
 
-            <h2 className="mt-7 text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase">
+            <h2 className="mt-7 text-[0.7rem] font-semibold tracking-[0.16em] text-[#163a2b] uppercase dark:text-[#edf4ed]">
               Civic Dispatch Networks
             </h2>
 
@@ -158,7 +154,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="flex size-8 items-center justify-center rounded-md bg-[#e6ebe1] text-[#3f4a43] transition-colors hover:bg-[#1a4332] hover:text-white"
+                    className="flex size-8 items-center justify-center rounded-md bg-[#e6ebe1] text-[#3f4a43] transition-colors hover:bg-[#1a4332] hover:text-white dark:bg-[#263a2d] dark:text-[#c2cec4] dark:hover:bg-[#8fa995] dark:hover:text-[#14251a]"
                   >
                     {social.icon}
                   </a>
@@ -170,15 +166,15 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-12">
-          <hr className="border-black/[0.10]" />
+          <hr className="border-black/[0.10] dark:border-white/[0.12]" />
 
-          <div className="mt-5 flex flex-col gap-3 text-xs text-[#6b746c] sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-5 flex flex-col gap-3 text-xs text-[#6b746c] sm:flex-row sm:items-center sm:justify-between dark:text-[#8fa995]">
             <p>
               © {currentYear} CIVORA Foundation. Dedicated to grassroots
               community resilience. All rights reserved.
             </p>
 
-            <p className="font-medium tracking-[0.12em] text-[#163a2b] uppercase">
+            <p className="font-medium tracking-[0.12em] text-[#163a2b] uppercase dark:text-[#edf4ed]">
               Dhaka Civic Development Initiative
             </p>
           </div>
