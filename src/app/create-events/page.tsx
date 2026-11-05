@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import {
   CalendarDays,
   MapPin,
@@ -114,8 +114,7 @@ export default function CreateEventPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.message || "Event creation failed!");
-        return;
+        notFound()
       }
 
       console.log(data);

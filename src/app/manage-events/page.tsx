@@ -24,6 +24,7 @@ import EditEventDialog from "@/components/dialog/EditEventDialog";
 import DeleteEventDialog from "@/components/dialog/DeleteEventDialog";
 import { IUserManageEvent } from "@/lib/types/userManageEvents";
 import { authClient } from "@/lib/auth-client";
+import { notFound } from "next/navigation";
 
 const ManageEventPage = () => {
   const { data: session, isPending } = authClient.useSession();
@@ -46,7 +47,7 @@ const ManageEventPage = () => {
         );
 
         if (!res.ok) {
-          throw new Error("Failed to fetch events");
+          notFound()
         }
 
         const data: IUserManageEvent[] = await res.json();

@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { IEvent } from "@/lib/types/events";
+import { notFound } from "next/navigation";
 
 const categories = [
   "All Categories",
@@ -52,7 +53,7 @@ const UpcomingEventPage = () => {
         const res = await fetch("http://localhost:8000/upcoming-events");
 
         if (!res.ok) {
-          throw new Error("Failed to fetch events");
+          notFound()
         }
 
         const event: IEvent[] = await res.json();
