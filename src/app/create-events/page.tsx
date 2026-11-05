@@ -99,7 +99,7 @@ export default function CreateEventPage() {
       });
 
       const data = await res.json();
-      // console.log(data);
+      console.log(data);
       
       toast.success("Event created successfully!")
       setForm(initialForm);

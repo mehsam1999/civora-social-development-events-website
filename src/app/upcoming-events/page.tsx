@@ -22,16 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-type Event = {
-  _id: string;
-  title: string;
-  description: string;
-  eventType: string;
-  eventDate: string;
-  imageUrl: string;
-  location: string;
-};
+import { IEvent } from "@/lib/types/events";
 
 const categories = [
   "All Categories",
@@ -45,7 +36,7 @@ const categories = [
 ];
 
 const UpcomingEventPage = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("All Categories");
@@ -64,8 +55,8 @@ const UpcomingEventPage = () => {
           throw new Error("Failed to fetch events");
         }
 
-        const data = await res.json();
-        setEvents(data);
+        const event: IEvent[] = await res.json();
+        setEvents(event);
       } catch (error) {
         console.log("Error fetching events:", error);
       } finally {
@@ -129,42 +120,42 @@ const UpcomingEventPage = () => {
   return (
     <main className="min-h-screen bg-[#ecf1e8] px-4 py-10 sm:px-6">
       {/* Heading */}
-    <div className="mx-auto mb-8 flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto mb-8 flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
 
         <div className="mx-auto w-full max-w-6xl">
-            <div>
-                <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#e6f0eb] px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-[#34745b]">
-                <span className="size-2 rounded-full bg-[#c15f3c]" />
-                FUTURE COMMUNITY DRIVES
-                </p>
+          <div>
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#e6f0eb] px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-[#34745b]">
+              <span className="size-2 rounded-full bg-[#c15f3c]" />
+              FUTURE COMMUNITY DRIVES
+            </p>
 
-                <h1 className="font-heading text-4xl font-medium tracking-tight text-[#173c2d] sm:text-5xl">
-                Upcoming Events
-                </h1>
-            </div>
+            <h1 className="font-heading text-4xl font-medium tracking-tight text-[#173c2d] sm:text-5xl">
+              Upcoming Events
+            </h1>
+          </div>
 
-            <div className="mt-2 md:flex w-full items-center justify-between gap-6">
-                <p className="max-w-xl text-sm leading-6 text-[#637268]">
-                Discover verified volunteer initiatives scheduled for upcoming dates.
-                Past events are automatically excluded so you can focus on active
-                drives that need support.
-                </p>
+          <div className="mt-2 md:flex w-full items-center justify-between gap-6">
+            <p className="max-w-xl text-sm leading-6 text-[#637268]">
+              Discover verified volunteer initiatives scheduled for upcoming dates.
+              Past events are automatically excluded so you can focus on active
+              drives that need support.
+            </p>
 
-                <Link
-                href="/create-events"
-                className="mt-2 flex h-10 w-full shrink-0 items-center justify-center rounded-sm bg-[#1a4332] px-6 text-white bg-[#003b2e] text-xs font-medium text-white transition-colors hover:bg-[#24513c] sm:mt-0 sm:w-auto"
-                >
-                <PlusCircle className="mr-2 size-4" />
-                Create Event
-                </Link>
-            </div>
+            <Link
+              href="/create-events"
+              className="mt-2 flex h-10 w-full shrink-0 items-center justify-center rounded-sm bg-[#1a4332] px-6 text-white bg-[#003b2e] text-xs font-medium text-white transition-colors hover:bg-[#24513c] sm:mt-0 sm:w-auto"
+            >
+              <PlusCircle className="mr-2 size-4" />
+              Create Event
+            </Link>
+          </div>
         </div>
-    </div>
-        
+      </div>
 
       {/* Filters */}
       <section className="mx-auto mt-7 max-w-6xl border-y border-[#dce8dc] py-3">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-[1.2fr_1.2fr_1.2fr_auto]">
+
           {/* Search */}
           <div className="relative">
             <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#78877c]" />

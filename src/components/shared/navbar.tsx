@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/popover"
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Sun, Home, ChevronRight, LogOut, UserRound } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,8 +38,10 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const hoverStyle = "hover:bg-[#e0ebe3] hover:text-[#1a4332]";
+
   const { data: session } = authClient.useSession()
   const user = session?.user
   // console.log(user)
@@ -47,6 +49,7 @@ export function Navbar() {
   const handleEmailSignOut = () =>{
     authClient.signOut()
     toast.success("You have successfully signed out")
+    router.push('/')
   }
   return (
     <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-[#faf8f5]/90 backdrop-blur">
@@ -177,7 +180,7 @@ export function Navbar() {
                     </Link>
 
                     <Link
-                      href="/join-events"
+                      href="/joined-events"
                       onClick={() => setOpen(false)}
                       className="flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm text-[#3f4a43] transition-colors hover:bg-[#e0ebe3] hover:text-[#1a4332]"
                     >

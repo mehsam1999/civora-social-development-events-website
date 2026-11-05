@@ -7,7 +7,7 @@ const quickLinks = [
   { href: "/upcoming-events", label: "Upcoming Events" },
   { href: "/create-events", label: "Create Events" },
   { href: "/manage-events", label: "Manage Events" },
-  { href: "/join-events", label: "Joined Events" },
+  { href: "/joined-events", label: "Joined Events" },
 ];
 
 const socials = [

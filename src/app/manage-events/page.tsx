@@ -22,20 +22,10 @@ import {
 } from "@/components/ui/pagination";
 import EditEventDialog from "@/components/dialog/EditEventDialog";
 import DeleteEventDialog from "@/components/dialog/DeleteEventDialog";
-
-
-type Event = {
-  _id: string;
-  title: string;
-  description: string;
-  eventType: string;
-  eventDate: string;
-  imageUrl: string;
-  location: string;
-};
+import { IEvent } from "@/lib/types/events";
 
 const ManageEventPage = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -51,7 +41,7 @@ const ManageEventPage = () => {
           throw new Error("Failed to fetch events");
         }
 
-        const data = await res.json();
+        const data: IEvent[] = await res.json();
         setEvents(data);
       } catch (error) {
         console.log("Error fetching events:", error);
